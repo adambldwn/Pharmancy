@@ -4,7 +4,7 @@ import {SafeAreaView,View,Text} from "react-native";
 export const District = (props)=>{
     const {province} = props.route.params
     
-
+   
     return(
         <SafeAreaView>
             <View>
