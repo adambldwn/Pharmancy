@@ -2,6 +2,7 @@ import React,{useEffect,useState} from "react";
 import {SafeAreaView,View,Text,FlatList,TouchableHighlight} from "react-native";
 import axios from "axios";
 
+
 export const District = (props)=>{
     const {province} = props.route.params
     const [datalist,setDatalist] = useState([])
