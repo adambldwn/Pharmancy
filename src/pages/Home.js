@@ -1,32 +1,50 @@
-import React from "react";
-import {SafeAreaView,View,Text,FlatList,TouchableHighlight} from "react-native";
-import {iller} from "../iller"
+import React from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export const Home = (props)=>{
-    
-    
-    
-    
-    const renderData = ({item}) => {
+import {iller} from '../iller';
+import {homeStyles} from './styles';
 
-        const myPress = () => props.navigation.navigate("District",{province: item.title})
+export const Home = (props) => {
 
-        return(
-            <TouchableHighlight onPress={myPress} underlayColor={false}>
-                <Text>{item.title}</Text>
-            </TouchableHighlight>
-        )
+  const renderData = ({item}) => {
+    const myPress = () => props.navigation.navigate('District', {province: item.title});
+
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    return(
-        <SafeAreaView>
-            <View>
-                <FlatList
-                    data={iller}
-                    renderItem={renderData}
-                    keyExtractor={(item)=>item.id}
-                />
-            </View>
-        </SafeAreaView>
-    )
-}
+    let mytext = capitalizeFirstLetter(item.title.toLowerCase());
+
+    return (
+      
+        <TouchableOpacity
+          onPress={myPress}
+          underlayColor={false}
+          style={homeStyles.button}
+        >
+          <Text style={homeStyles.text}>{mytext}</Text>
+          <Icon name="angle-right" size={30} color="#900" style={{marginRight:10}}/>
+        </TouchableOpacity>
+      
+    );
+  };
+
+  return (
+    <SafeAreaView style={{flex: 1}}>
+      <View>
+        <FlatList
+          data={iller}
+          renderItem={renderData}
+          keyExtractor={item => item.id}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};

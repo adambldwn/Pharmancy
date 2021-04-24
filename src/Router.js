@@ -11,9 +11,35 @@ export const Router= ()=> {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="District" component={District} />
-        <Stack.Screen name="Pharmancy" component={Pharmancy} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title:"SEHIRLER", 
+            headerStyle:{backgroundColor:"#b71c1c"},
+            headerTintColor: '#fff',
+            headerTitleStyle: { fontWeight: 'bold'},
+            }}/>
+        <Stack.Screen
+          name="District"
+          component={District} 
+          options={{
+            title:"ILCELER", 
+            headerStyle:{backgroundColor:"#b71c1c"},
+            headerTintColor: '#fff',
+            headerTitleStyle: { fontWeight: 'bold'},
+            }}
+          />
+        <Stack.Screen
+          name="Pharmancy"
+          component={Pharmancy}
+          options={{
+            title:"ECZANE", 
+            headerStyle:{backgroundColor:"#b71c1c"},
+            headerTintColor: '#fff',
+            headerTitleStyle: { fontWeight: 'bold'},
+            }}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   );
