@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useRef} from 'react';
 import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView,{ Marker }  from 'react-native-maps';
@@ -9,6 +9,9 @@ import {pharmancyStyles} from './styles';
 export const Pharmancy = props => {
   const {district, province} = props.route.params;
   const [dataList, setDataList] = useState([]);
+  const [position,setPosition] = useState([]);
+
+  const mapRef = useRef(null);
 
   const fetchData = () => {
     axios
@@ -19,13 +22,26 @@ export const Pharmancy = props => {
         },
         headers: {
           'x-rapidapi-key':
-            'da03f4ac24mshfdc5ea129989060p111edajsn4cecb5b0d860',
+            '142631cdecmshc630b70f204e7c7p18b1a9jsnfcfdbfa731e4',
           'x-rapidapi-host': 'turkey-pharmacy.p.rapidapi.com',
         },
+      }).then((res)=>{
+        setDataList(res.data.result[0])
+        return res.data.result[0]
+      }).then((res)=>{
+        // const arr = dataList.loc.split(",")
+        console.log(res)
       })
-      .then(res => setDataList(res.data.result[0]));
+      
+
+      mapRef.current.fitToCoordinates([
+        {
+          latitude: 40.934425,
+          longitude: 38.213976
+        }
+      ])
   };
-  console.log(dataList);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -54,21 +70,26 @@ export const Pharmancy = props => {
         </View>
       </View>
 
-      {/* <View>
+      <View>
         <MapView
-          style={{height: 400,margin:5}}
+          ref={mapRef}
+          style={{height: 600,margin:5}}
           initialRegion={{
             latitude: 37.78825,
             longitude: -122.4324,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
-      </View> */}
-      <Marker
-  coordinate={{ latitude : 40.934425 , longitude : 38.213976 }}
-//   image={{uri: 'custom_pin'}}
-/>
+        >
+          <Marker
+            coordinate={{
+              latitude: 40.934425,
+              longitude: 38.213976
+            }}
+          />
+        </MapView>
+      </View>
+     
     </SafeAreaView>
   );
 };

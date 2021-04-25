@@ -14,7 +14,7 @@ export const District = (props)=>{
                 il:province
             },
             headers:{
-                'x-rapidapi-key': 'da03f4ac24mshfdc5ea129989060p111edajsn4cecb5b0d860',
+                'x-rapidapi-key': '142631cdecmshc630b70f204e7c7p18b1a9jsnfcfdbfa731e4',
                 'x-rapidapi-host': 'turkey-pharmacy.p.rapidapi.com'
             }
         }).then((response)=>setDatalist(response.data.result))
