@@ -17,3 +17,23 @@ export const homeStyles = StyleSheet.create({
         
     }
 })
+
+export const pharmancyStyles = StyleSheet.create({
+    container:{
+        padding:10,
+        backgroundColor:"#e0e0e0",
+    },
+    title:{
+        marginBottom:5,
+        fontSize:20,
+        fontWeight:"bold"
+    },
+    subContainer:{
+        flexDirection:"row",
+        alignItems:"center"
+    },
+    iconStyle:{
+        marginRight:5,
+        width:20
+    }
+})

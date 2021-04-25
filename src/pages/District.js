@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from "react";
-import {SafeAreaView,View,Text,FlatList,TouchableHighlight} from "react-native";
+import {SafeAreaView,View,Text,FlatList, TouchableOpacity} from "react-native";
 import axios from "axios";
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {homeStyles} from "./styles"
 
 export const District = (props)=>{
     const {province} = props.route.params
@@ -13,12 +14,10 @@ export const District = (props)=>{
                 il:province
             },
             headers:{
-                'x-rapidapi-key': '0757ad8163msha2440650db3dcf9p1afca5jsn047fb5354ce9',
+                'x-rapidapi-key': 'da03f4ac24mshfdc5ea129989060p111edajsn4cecb5b0d860',
                 'x-rapidapi-host': 'turkey-pharmacy.p.rapidapi.com'
             }
         }).then((response)=>setDatalist(response.data.result))
-
-        
     }
     
     const renderData = ({item}) => {
@@ -28,9 +27,10 @@ export const District = (props)=>{
         }
         
         return(
-            <TouchableHighlight onPress={myPress} underlayColor={false}>
-                <Text>{item.text}</Text>
-            </TouchableHighlight>
+            <TouchableOpacity onPress={myPress} underlayColor={false} style={homeStyles.button}>
+                <Text style={homeStyles.text}>{item.text}</Text>
+                <Icon name="angle-right" size={30} color="#900" style={{marginRight:10}}/>
+            </TouchableOpacity>
         )
     }
 
