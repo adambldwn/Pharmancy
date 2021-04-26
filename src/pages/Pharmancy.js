@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useState, useEffect,useRef} from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {SafeAreaView, View, Text, ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView,{ Marker }  from 'react-native-maps';
 
@@ -9,7 +9,8 @@ import {pharmancyStyles} from './styles';
 export const Pharmancy = props => {
   const {district, province} = props.route.params;
   const [dataList, setDataList] = useState([]);
-  const [position,setPosition] = useState([]);
+  const [lat,setLat] = useState("");
+  const [long,setLong] = useState("");
 
   const mapRef = useRef(null);
 
@@ -22,25 +23,29 @@ export const Pharmancy = props => {
         },
         headers: {
           'x-rapidapi-key':
-            '142631cdecmshc630b70f204e7c7p18b1a9jsnfcfdbfa731e4',
+            '30db95e182msh3c509f9ed359404p1e9f17jsn25816da7e3fb',
           'x-rapidapi-host': 'turkey-pharmacy.p.rapidapi.com',
         },
       }).then((res)=>{
         setDataList(res.data.result[0])
-        return res.data.result[0]
-      }).then((res)=>{
-        // const arr = dataList.loc.split(",")
-        console.log(res)
+        const arr = res.data.result[0].loc.split(",")
+        console.log(arr)
+        setLat(parseFloat(arr[0]))
+        setLong(parseFloat(arr[1]))
+        mapRef.current.fitToCoordinates([
+          {
+            latitude: parseFloat(arr[0]),
+            longitude: parseFloat(arr[1])
+          }
+        ])
       })
-      
 
-      mapRef.current.fitToCoordinates([
-        {
-          latitude: 40.934425,
-          longitude: 38.213976
-        }
-      ])
-  };
+
+    };
+    
+    console.log(lat)
+    console.log(long)
+  
 
   useEffect(() => {
     fetchData();
@@ -71,7 +76,7 @@ export const Pharmancy = props => {
       </View>
 
       <View>
-        <MapView
+       { lat && long ? <MapView
           ref={mapRef}
           style={{height: 600,margin:5}}
           initialRegion={{
@@ -83,11 +88,11 @@ export const Pharmancy = props => {
         >
           <Marker
             coordinate={{
-              latitude: 40.934425,
-              longitude: 38.213976
+              latitude: lat,
+              longitude: long
             }}
           />
-        </MapView>
+        </MapView> : <ActivityIndicator size="large" color="#6d4c41"/>}
       </View>
      
     </SafeAreaView>
