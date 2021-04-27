@@ -91,7 +91,6 @@
 				557D26B12FCA343E554398F5 /* Pods-pharmancy-pharmancyTests.debug.xcconfig */,
 				77E5FAE276C7E3B1B2B2A62C /* Pods-pharmancy-pharmancyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WBG8BG467U;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = pharmancy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -511,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WBG8BG467U;
 				INFOPLIST_FILE = pharmancy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

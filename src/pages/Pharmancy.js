@@ -29,7 +29,6 @@ export const Pharmancy = props => {
       }).then((res)=>{
         setDataList(res.data.result[0])
         const arr = res.data.result[0].loc.split(",")
-        console.log(arr)
         setLat(parseFloat(arr[0]))
         setLong(parseFloat(arr[1]))
         mapRef.current.fitToCoordinates([
@@ -39,14 +38,8 @@ export const Pharmancy = props => {
           }
         ])
       })
-
-
     };
     
-    console.log(lat)
-    console.log(long)
-  
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -87,11 +80,14 @@ export const Pharmancy = props => {
           }}
         >
           <Marker
+            title={dataList.name}
             coordinate={{
               latitude: lat,
               longitude: long
             }}
+            onPress={()=> console.log("deneme")}
           />
+
         </MapView> : <ActivityIndicator size="large" color="#6d4c41"/>}
       </View>
      
