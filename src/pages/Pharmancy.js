@@ -3,6 +3,8 @@ import React, {useState, useEffect,useRef} from 'react';
 import {SafeAreaView, View, Text, ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView,{ Marker }  from 'react-native-maps';
+import { showLocation } from 'react-native-map-link'
+import Geolocation from '@react-native-community/geolocation';
 
 import {pharmancyStyles} from './styles';
 
@@ -23,7 +25,7 @@ export const Pharmancy = props => {
         },
         headers: {
           'x-rapidapi-key':
-            '30db95e182msh3c509f9ed359404p1e9f17jsn25816da7e3fb',
+            '142631cdecmshc630b70f204e7c7p18b1a9jsnfcfdbfa731e4',
           'x-rapidapi-host': 'turkey-pharmacy.p.rapidapi.com',
         },
       }).then((res)=>{
@@ -31,6 +33,10 @@ export const Pharmancy = props => {
         const arr = res.data.result[0].loc.split(",")
         setLat(parseFloat(arr[0]))
         setLong(parseFloat(arr[1]))
+
+        // console.log(parseFloat(arr[0]))
+        // console.log(parseFloat(arr[1]))
+
         mapRef.current.fitToCoordinates([
           {
             latitude: parseFloat(arr[0]),
@@ -40,6 +46,19 @@ export const Pharmancy = props => {
       })
     };
     
+    const markerPress = () => {
+      Geolocation.getCurrentPosition((info) => {
+      
+      showLocation({
+        latitude: lat,
+        longitude: long,
+        sourceLatitude: info.coords.latitude,
+        sourceLongitude: info.coords.longitude,
+      })
+      });
+      
+    }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -85,7 +104,7 @@ export const Pharmancy = props => {
               latitude: lat,
               longitude: long
             }}
-            onPress={()=> console.log("deneme")}
+            onPress={markerPress}
           />
 
         </MapView> : <ActivityIndicator size="large" color="#6d4c41"/>}
@@ -94,3 +113,11 @@ export const Pharmancy = props => {
     </SafeAreaView>
   );
 };
+
+// openMap({ 
+//   latitude: 40.93740999, 
+//   longitude: 38.22554196,
+//   provider: 'apple',
+//   end: dataList.loc,
+//   // navigate_mode: 'navigate',
+// })
